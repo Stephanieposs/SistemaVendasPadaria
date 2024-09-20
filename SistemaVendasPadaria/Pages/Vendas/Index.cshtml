@@ -1,0 +1,89 @@
+﻿@page
+@model SistemaVendasPadaria.Pages.Vendas.IndexModel
+@{
+
+}
+
+<!-- Formulário que vai enviar a ação para o back-end -->
+<form method="post">
+    <h4>Selecione um Cliente</h4>
+    <select asp-for="IdSelectedCliente" asp-items="Model.ClientesList" class="form-control">
+        <option value="">Selecione um Cliente</option>
+    </select>
+
+    <h4>Selecione um Produto</h4>
+    <select asp-for="IdSelectedProduto" asp-items="@(new SelectList(Model.ProdutosList, "Id", "Nome"))" class="form-control">
+        <option value="">Selecione um Produto</option>
+    </select>
+
+    <!-- Input para a quantidade -->
+    <h4>Informe a Quantidade</h4>
+    <input asp-for="QuantidadeProd" class="form-control" type="number" min="1" placeholder="Digite a quantidade" />
+
+    <!-- Botão de adicionar -->
+    <button type="submit" asp-page-handler="Adicionar" class="btn btn-primary mt-3">Adicionar</button>
+</form>
+
+<!-- Exibe uma mensagem de feedback ao usuário
+if (!string.IsNullOrEmpty(Model.Mensagem))
+{
+    <div class="alert alert-info mt-3">
+        Model.Mensagem
+    </div>
+}-->
+
+
+
+
+<div class="container">
+    <!-- Verificar se TempData contém uma mensagem -->
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-info" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemVendas[0].Produto.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemVendas[0].Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemVendas[0].Produto.preco)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ItemVendas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.preco)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Produto">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Produto">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Produto">Delete</a>
+                </td>
+            </tr>
+        }
+        <h3 asp-items="Model.Total">Total: @Html.DisplayName(Model.Total.ToString()) </h3>
+    </tbody>
+</table>
+
+<form method="post">
+    <button type="submit" asp-page-handler="Finalizar" class="btn btn-primary mt-3">Finalizar</button>
+</form>
