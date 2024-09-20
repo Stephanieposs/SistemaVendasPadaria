@@ -73,6 +73,9 @@ if (!string.IsNullOrEmpty(Model.Mensagem))
                 <td>
                     @Html.DisplayFor(modelItem => item.Produto.preco)
                 </td>
+                <!-- <td>
+                    Html.DisplayFor(modelItem => (item.Produto.preco * item.Quantidade))
+                </td>   -->
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Produto">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.Produto">Details</a> |

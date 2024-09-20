@@ -10,5 +10,18 @@
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
 
+        /*
+        public double Total {
+            get
+            {
+                
+            }
+            set
+            {
+                Quantidade * Produto.preco;
+            }
+        }
+        */
+
     }
 }

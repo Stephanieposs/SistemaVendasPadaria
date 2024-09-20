@@ -87,12 +87,14 @@ namespace SistemaVendasPadaria.Pages.Vendas
             ItemVenda novoItem = new ItemVenda()
             {
                 
-                VendaId = Vendas[Vendas.Count-1].Id,
-                Produto = produto,
+                //VendaId = Vendas[Vendas.Count-1].Id,
+                //Produto = produto,
                 ProdutoId = produto.Id,
                 //ProdutoId = IdSelectedProduto,
                 Quantidade = QuantidadeProd
             };
+
+
 
             _context.ItemVendas.Add(novoItem);
             await _context.SaveChangesAsync();
@@ -104,12 +106,14 @@ namespace SistemaVendasPadaria.Pages.Vendas
             }
             ItemVendas.Add(novoItem);
 
+            /*
             foreach (var item in ItemVendas)
             {
                 
                 var precoProd =+ item.Produto.preco;
                 Total =+ precoProd;
             }
+            */
 
             var cliente = await _context.ClienteRegistrado.FindAsync(IdSelectedCliente);
             if (cliente == null)
